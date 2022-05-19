@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserService } from '../user/user.service';
 import {LoginDto} from './dto/login.dto'
@@ -12,7 +12,8 @@ export class AuthController {
         private readonly userService: UserService,
         private readonly applicationService : ApplicationService
     ){}
-
+    
+    @HttpCode(200)
     @Post('/login')
     async login(@Body() loginDto : LoginDto) : Promise<any>{
         const user = await this.userService.findByUsername(loginDto.user_name)

@@ -4,7 +4,7 @@ import { Role } from "./role.entity";
 import { GenericEntity } from 'src/generic/generic.entity';
 
 @Entity('role_permissions')
-class RolePermission extends GenericEntity {
+class RolePermission extends GenericEntity{
 
     @ManyToOne(() => Role, role => role.rolePermissions)
     @JoinColumn()

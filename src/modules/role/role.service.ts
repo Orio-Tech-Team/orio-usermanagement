@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable, Put } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository ,In, getConnection} from 'typeorm';
+import { Repository, In, getConnection, Column } from 'typeorm';
 import { Role } from './entities/role.entity';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { Permission } from '../menu/entities/permission.entity';
@@ -22,11 +22,12 @@ export class RoleService {
         let permissionsData = []
         await permissions.map(permission => {
             let singlePermission = {
-                permisisonId : permission.permission_id,
-                roleId: newRole.id
+                permission : permission.permission_id,
+                role: newRole.id
             }
             permissionsData.push(singlePermission)
         })
+        console.log(permissionsData)
         await getConnection().
         createQueryBuilder().
         insert().

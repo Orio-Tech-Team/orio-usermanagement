@@ -17,12 +17,11 @@ export class AuthController {
     @Post('/login')
     async login(@Body() loginDto : LoginDto) : Promise<any>{
         const user = await this.userService.findByUsername(loginDto.user_name)
-        console.log(user)
-        const token = await this.authService.login(user, loginDto.password)
+        const loginService = await this.authService.login(user, loginDto)
         const application = await this.applicationService.findByRole(user.role.id,loginDto.application_tag)
         return {
-            token : token,
-            application : application
+            token : loginService.token,
+            otp : loginService.otp
         }
     }
 }

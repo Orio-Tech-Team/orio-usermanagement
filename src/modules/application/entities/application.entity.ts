@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { GenericEntity } from "src/generic/generic.entity";
 import { Menu } from "src/modules/menu/entities/menu.entity";
-import { classToPlain } from "class-transformer";
+import { Slider } from "src/modules/slider/entities/slider.entity";
 
 @Entity('applications')
 export class Application extends GenericEntity{
@@ -19,7 +19,15 @@ export class Application extends GenericEntity{
     name : string
 
     @ApiProperty()
+    @Column({default:true , select:false})
+    password_required : boolean
+
+    @ApiProperty()
     @OneToMany(() => Menu, (menu) => menu.application)
     @JoinColumn()
     menu: Menu[];
+
+    @OneToMany(() => Slider, (slider) => slider.application)
+    @JoinColumn()
+    slider: Slider[];
 }

@@ -38,6 +38,16 @@ export class ApplicationService {
         });
     }
 
+    async findByTag(applicationTag : string) : Promise<Application>{
+        return await this.applicationRepository.findOneOrFail({
+            where : {
+                tag : applicationTag
+            }
+        }).catch(error=> {
+            throw FindOneException.exception("Application Not Found")
+        });
+    }
+
     async findByRole(roleId , applicationTag) {
         return this.applicationRepository.createQueryBuilder('application').
         innerJoinAndSelect('application.menu','menu').

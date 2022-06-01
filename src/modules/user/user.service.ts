@@ -33,7 +33,7 @@ export class UserService {
                     role : "users.role"
                 }
             },
-            select :["id","user_name","password","refrence_number","phone"],
+            select :["id","user_name","password","refrence_number","phone","first_name"],
             where : {
                 user_name:userName
             }

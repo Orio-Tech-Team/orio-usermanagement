@@ -20,6 +20,7 @@ export class AuthController {
         const loginService = await this.authService.login(user, loginDto)
         await this.applicationService.findByRole(user.role.id,loginDto.application_tag)
         return {
+            name : user.first_name,
             token : loginService.token,
             otp : loginService.otp
         }

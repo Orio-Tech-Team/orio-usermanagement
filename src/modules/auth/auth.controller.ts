@@ -18,7 +18,7 @@ export class AuthController {
     async login(@Body() loginDto : LoginDto) : Promise<any>{
         const user = await this.userService.findByUsername(loginDto.user_name)
         const loginService = await this.authService.login(user, loginDto)
-        const application = await this.applicationService.findByRole(user.role.id,loginDto.application_tag)
+        await this.applicationService.findByRole(user.role.id,loginDto.application_tag)
         return {
             token : loginService.token,
             otp : loginService.otp

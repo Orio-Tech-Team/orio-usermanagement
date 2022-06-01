@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { SliderModule } from './modules/slider/slider.module';
+import { ModuleModule } from './modules/module/module.module';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { SliderModule } from './modules/slider/slider.module';
       }
     ),
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig), 
-    ApplicationModule, RoleModule, MenuModule, UserModule, AuthModule, SliderModule],
+    ApplicationModule, RoleModule, MenuModule, UserModule, AuthModule, SliderModule, ModuleModule],
   controllers: [],
   providers: [],
 })

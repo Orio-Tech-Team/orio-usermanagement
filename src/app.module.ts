@@ -9,6 +9,7 @@ import { typeOrmAsyncConfig } from './config/typeorm.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { SliderModule } from './modules/slider/slider.module';
 import { ModuleModule } from './modules/module/module.module';
+import { PublicModule } from './modules/public/public.module';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { ModuleModule } from './modules/module/module.module';
       }
     ),
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig), 
-    ApplicationModule, RoleModule, MenuModule, UserModule, AuthModule, SliderModule, ModuleModule],
+    ApplicationModule, RoleModule, MenuModule, UserModule, AuthModule, SliderModule, ModuleModule, PublicModule],
   controllers: [],
   providers: [],
 })

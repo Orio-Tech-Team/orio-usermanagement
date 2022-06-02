@@ -4,8 +4,6 @@ import { Module } from './entities/module.entity';
 import { getManager, Repository, In } from 'typeorm';
 import { CreateModuleDto } from './dto/create-module.dto';
 import { FindOneException } from 'src/Helper/Exception/findone.exception';
-import RolePermission from '../role/entities/role-permission.entity';
-import { UnAuthorizedException } from 'src/Helper/Exception/unauthorized.exception';
 import { Menu } from '../menu/entities/menu.entity';
 
 @Injectable()

@@ -14,6 +14,9 @@ export class RoleService {
         private readonly permissionRepository: Repository<Permission>,
     ){}
 
+    /*
+        1 - Use For own controller POST API
+    */
     async create(role : CreateRoleDto){
         const {name , permissions} = role
         const newRole = await this.roleRepository.save(
@@ -27,7 +30,6 @@ export class RoleService {
             }
             permissionsData.push(singlePermission)
         })
-        console.log(permissionsData)
         await getConnection().
         createQueryBuilder().
         insert().
@@ -38,6 +40,10 @@ export class RoleService {
         return {...role,id : newRole.id , permissions : permissionsData}
     }
 
+
+    /*
+        1 - Use for User controller User POST API role validation 
+    */
     async findById(roleId : number) : Promise<Role>{
         return await this.roleRepository.findOneOrFail({id:roleId}).catch(error => {
             throw new HttpException({

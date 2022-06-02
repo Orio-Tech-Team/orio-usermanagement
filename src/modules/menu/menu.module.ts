@@ -4,12 +4,12 @@ import { MenuController } from './menu.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Menu } from './entities/menu.entity';
 import { Permission } from './entities/permission.entity';
-import { Application } from '../application/entities/application.entity';
-import { ApplicationService } from '../application/application.service';
+import { Module as ModuleEntity } from 'src/modules/module/entities/module.entity';
+import { ModuleService } from '../module/module.service';
 
 @Module({
-  imports : [TypeOrmModule.forFeature([Menu,Permission,Application])],
+  imports : [TypeOrmModule.forFeature([Menu,Permission,ModuleEntity])],
   controllers: [MenuController],
-  providers: [MenuService,ApplicationService]
+  providers: [MenuService,ModuleService]
 })
 export class MenuModule {}

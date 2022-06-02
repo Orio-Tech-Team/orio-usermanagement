@@ -12,14 +12,4 @@ export class ApplicationController {
         return this.applicationService.create(application)
     }
 
-    @Get()
-    findAll() : Promise<Application[]>{
-        return this.applicationService.findAll()
-    }
-
-    @Get(":id")
-    findById(@Param("id") id :number) : Promise<Application>{
-        return this.applicationService.findById(+id);
-    }
-
 }

@@ -14,21 +14,13 @@ export class MenuService {
         private readonly menuRepository : Repository<Menu>
     ){}
 
-    async create(menu : CreateMenuDto , application : Application){
+    /*
+        1 - Use For own controller POST API
+    */
+    async create(menu : CreateMenuDto){
         return await this.menuRepository.save(
-            this.menuRepository.create({...menu,application})
+            this.menuRepository.create(menu)
         )
-    }
-
-    async findById(menuId : number) : Promise<Menu> {
-        return await this.menuRepository.findOneOrFail({
-            where : {
-                id : menuId
-            },
-            relations : ['permissions']
-        }).catch(error=> {
-            throw FindOneException.exception("Menu Not Found")
-        });
     }
 
 }

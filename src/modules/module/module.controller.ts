@@ -1,10 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { Module } from './entities/module.entity';
 import { ModuleService } from './module.service';
+import { ApplicationService } from '../application/application.service';
+import { CreateModuleDto } from './dto/create-module.dto';
 
 @Controller('modules')
 export class ModuleController {
-  constructor(private readonly moduleService: ModuleService) {}
+  constructor(
+      private readonly moduleService: ModuleService,
+      private readonly applicationService : ApplicationService
+  ) {}
+
+  @Get()
+  async findAll(){
+      return this.moduleService.findByRole(1)
+  }
+  
+  @Post()
+  async create(@Body() moduleData : CreateModuleDto) : Promise<Module>{
+      await this.applicationService.findById(moduleData.application_id)
+      return this.moduleService.create(moduleData)
+  }
 
   @ApiBearerAuth('JWT-auth')
   @Get("user")

@@ -4,23 +4,35 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Permission } from "./permission.entity";
 import { classToPlain, Exclude } from "class-transformer";
 import { Application } from "src/modules/application/entities/application.entity";
+import { Module } from "src/modules/module/entities/module.entity";
 
 @Entity('menus')
 export class Menu extends GenericEntity{
     
-    @ApiProperty()
     @Column({nullable:false})
     name: string
 
-    @ApiProperty()
-    @Exclude({ toPlainOnly: true })
-    @ManyToOne(() => Application, (application) => application.menu , {nullable:false , onDelete:"CASCADE" , onUpdate:"CASCADE"})
-    @JoinColumn({name : "application_id"})
-    application: Application;
+    @Column({nullable:false , unique:true})
+    tag: string
 
-    @ApiProperty()
+    @Column({ nullable: true })
+    parent_id: number;
+
+    @Column({ nullable: false })
+    module_id: number;
+
+    @ManyToOne(()=>Module , (module) => module.menus)
+    @JoinColumn({name : "module_id"})
+    module : Module
+
+    @ManyToOne(()=>Menu , (menu)=>menu.childrens)
+    @JoinColumn({name : "parent_id"})
+    parent : Menu
+
+    @OneToMany(type => Menu, category => category.parent)
+    childrens: Menu[];
+
     @OneToMany(()=>Permission , (permissions) => permissions.menu,{cascade:true})
-    @JoinColumn()
     permissions : Permission[]
 
     toJSON() {

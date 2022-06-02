@@ -14,30 +14,28 @@ export class ApplicationService {
         private readonly applicationRepository : Repository<Application>    
     ){}
 
-
+    /*
+        1 - Use For own controller POST API
+    */
     async create(application : CreateApplicationDto){
         return await this.applicationRepository.save(
             this.applicationRepository.create(application)
         )
     }
 
-    async findAll() : Promise<Application[]> {
-        return await this.applicationRepository.find({
-            relations : ['menu']
-        })
-    }
-
+    /*
+        1 - Use for module controller Module POST API applcaition validation 
+    */
     async findById(id : number) : Promise<Application>{
         return await this.applicationRepository.findOneOrFail({
             where : {
                 id : id
-            },
-            relations : ['menu']
+            }
         }).catch(error=> {
             throw FindOneException.exception("Application Not Found")
         });
     }
-
+    
     async findByTag(applicationTag : string) : Promise<Application>{
         return await this.applicationRepository.findOneOrFail({
             where : {
@@ -50,8 +48,9 @@ export class ApplicationService {
 
     async findByRole(roleId , applicationTag) {
         return this.applicationRepository.createQueryBuilder('application').
-        innerJoinAndSelect('application.menu','menu').
-        innerJoinAndSelect('menu.permissions','permissions').
+        innerJoin('application.modules','module').
+        innerJoin('module.menus','menu'). 
+        innerJoin('menu.permissions','permissions').
         where(rolepermission => {
             const subQuery = rolepermission.subQuery().
             select("role_permissions.permissionId")

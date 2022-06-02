@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Type } from 'class-transformer';
-import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, ValidateNested } from 'class-validator';
+import { IsInt, IsNotEmpty, IsNotEmptyObject, IsString, ValidateNested, IsOptional } from 'class-validator';
 
 export class PermissionDto {
     @IsNotEmpty()
@@ -18,11 +18,22 @@ export class CreateMenuDto {
     @IsString()
     @ApiProperty()
     name : string
+
+    @IsNotEmpty()
+    @IsString()
+    @ApiProperty()
+    tag : string
     
     @IsNotEmpty()
     @IsInt()
     @ApiProperty()
-    applicationId : number
+    module_id : number
+
+    @IsOptional()
+    @IsInt()
+    @ApiProperty()
+    parent_id : number
+
     
     @ApiProperty({type:[PermissionDto]})
     @ValidateNested({each:true})

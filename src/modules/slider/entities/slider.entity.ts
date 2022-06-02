@@ -12,8 +12,11 @@ export class Slider extends GenericEntity{
     @Column({nullable:false})
     image : string
 
+    @Column({nullable:false})
+    application_id : number
+
     @ManyToOne(() => Application, (application) => application.slider , {nullable:false , onDelete:"CASCADE" , onUpdate:"CASCADE"})
-    @JoinColumn({name : "application_id"})
+    @JoinColumn({name : "application_tag" , referencedColumnName : 'tag'})
     application: Application;
 
 

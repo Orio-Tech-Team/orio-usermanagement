@@ -2,7 +2,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 export class UnAuthorizedException{
     static exception(errorMessage){
         throw new HttpException({
-            message : errorMessage
+            message : [errorMessage]
         },HttpStatus.UNAUTHORIZED)
     }
 }

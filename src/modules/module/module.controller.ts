@@ -30,11 +30,14 @@ export class ModuleController {
         {
           id : 1,
           name : "Attendance",
+          icon : "attendance.svg",
+          hide : false,
           menus : [
             {
               id : "1",
               name : "Attendance",
-              tag : "attendance-screen",
+              tag : "attendance_screen",
+              icon : "attendance.svg",
               submenus : [],
               permissions : [
                 {
@@ -49,11 +52,14 @@ export class ModuleController {
         {
           id : 2,
           name : "Rider",
+          hide : true,
+          icon : "rider.svg",
           menus : [
             {
               id : "2",
               name : "Delivery",
               tag : "delivery-screen",
+              icon : "rider.svg",
               permissions : [
                 {
                   id : 2,
@@ -72,6 +78,7 @@ export class ModuleController {
               id : "3",
               name : "Pickup",
               tag : "pickup-screen",
+              icon : "rider.svg",
               submenus : [],
               permissions : [
                 {

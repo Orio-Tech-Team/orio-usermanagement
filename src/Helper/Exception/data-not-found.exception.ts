@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
-export class FindOneException{
+export class DataNotFound{
     static exception(errorMessage){
         throw new HttpException({
             message : [errorMessage]

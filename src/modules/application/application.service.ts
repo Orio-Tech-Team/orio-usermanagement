@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneException } from 'src/Helper/Exception/findone.exception';
+import { DataNotFound } from 'src/Helper/Exception/data-not-found.exception';
 import { UnAuthorizedException } from 'src/Helper/Exception/unauthorized.exception';
 import { Repository } from 'typeorm';
 import RolePermission from '../role/entities/role-permission.entity';
@@ -32,7 +32,7 @@ export class ApplicationService {
                 id : id
             }
         }).catch(error=> {
-            throw FindOneException.exception("Application Not Found")
+            throw DataNotFound.exception("Application Not Found")
         });
     }
     
@@ -42,7 +42,7 @@ export class ApplicationService {
                 tag : applicationTag
             }
         }).catch(error=> {
-            throw FindOneException.exception("Application Not Found")
+            throw DataNotFound.exception("Application Not Found")
         });
     }
 

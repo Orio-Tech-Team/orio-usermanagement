@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FindOneException } from 'src/Helper/Exception/findone.exception';
+import { DataNotFound } from 'src/Helper/Exception/data-not-found.exception';
 import { Repository } from 'typeorm';
 import { Application } from '../application/entities/application.entity';
 import { CreateMenuDto } from './dto/create-menu.dto';

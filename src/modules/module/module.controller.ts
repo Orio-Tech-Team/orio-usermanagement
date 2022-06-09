@@ -14,7 +14,7 @@ export class ModuleController {
 
   @Get()
   async findAll(){
-      return this.moduleService.findByRole(1)
+      return await this.moduleService.findByRole(1)
   }
   
   @Post()

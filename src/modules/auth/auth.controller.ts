@@ -20,6 +20,7 @@ export class AuthController {
         const loginService = await this.authService.login(user, loginDto)
         return {
             name : user.first_name,
+            phone : user.phone,
             token : loginService.token,
             otp : loginService.otp
         }

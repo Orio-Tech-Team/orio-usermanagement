@@ -20,6 +20,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
         },
         extra: {
           charset: 'utf8mb4_unicode_ci',
+          connectionLimit: 5
         },
         synchronize: false,
         logging: true,
@@ -41,6 +42,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     },
     extra: {
       charset: 'utf8mb4_unicode_ci',
+      connectionLimit: 5
     },
     synchronize: false,
     logging: true,

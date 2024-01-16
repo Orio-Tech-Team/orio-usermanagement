@@ -16,7 +16,7 @@ export class AuthController {
   @HttpCode(200)
   @Post('/login')
   async login(@Body() loginDto: LoginDto): Promise<any> {
-    const user = await this.userService.findByUsername(loginDto.user_name);
+    const user = await this.userService.findByUsernameAndPassword(loginDto.user_name,loginDto.password);
     await this.applicationService.findByRole(
       user.role.id,
       loginDto.application_tag,

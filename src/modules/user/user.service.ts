@@ -42,6 +42,24 @@ export class UserService {
         })
     }
 
+    async findByUsernameAndPassword(userName : string,password : string){
+        return await this.userRepository.findOneOrFail({
+            join :{
+                alias : "users",
+                innerJoinAndSelect : {
+                    role : "users.role"
+                }
+            },
+            select :["id","user_name","password","refrence_number","phone","first_name"],
+            where : {
+                user_name:userName,
+                password:password
+            }
+        }).catch(error => {
+            throw UnAuthorizedException.exception("Invalid Username")
+        })
+    }
+
     async create(user : CreateUserDto , role : Role){
         delete user.roleId
         return await this.userRepository.save({...user,role});

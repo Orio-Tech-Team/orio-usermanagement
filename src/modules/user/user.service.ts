@@ -42,6 +42,23 @@ export class UserService {
         })
     }
 
+    async findByUserRef(ref : string){
+        return await this.userRepository.findOneOrFail({
+            join :{
+                alias : "users",
+                innerJoinAndSelect : {
+                    role : "users.role"
+                }
+            },
+            select :["id","user_name","password","refrence_number","phone","first_name"],
+            where : {
+                refrence_number:ref
+            }
+        }).catch(error => {
+            throw UnAuthorizedException.exception("Invalid Reference No")
+        })
+    }
+
     async findByUsernameAndPassword(userName : string,password : string){
         return await this.userRepository.findOneOrFail({
             join :{

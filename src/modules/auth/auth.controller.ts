@@ -33,7 +33,7 @@ export class AuthController {
   @HttpCode(200)
   @Post('/login/app')
   async loginApp(@Body() loginDto: LoginDto): Promise<any> {
-    const user = await this.userService.findByUsername(loginDto.user_name);
+    const user = await this.userService.findByUserRef(loginDto.user_name);
     await this.applicationService.findByRole(
       user.role.id,
       loginDto.application_tag,
